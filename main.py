@@ -1,16 +1,25 @@
 from tkinter import *
 import sqlite3
-
 import bcrypt
-
+from Views.registerView import registerView
+from Views.loginView import loginView
 root = Tk()
 
 fullname = StringVar()
 username = StringVar()
 password = StringVar()
 
+registerFrame = Frame(root)
+registerFrame.pack()
+
+loginFrame = Frame(root)
+# loginFrame.pack(row=0,column=0)
 
 root.geometry('500x500+200+100')
+
+def switchPage(currentFrame, nextFrame):
+    currentFrame.pack_forget()
+    nextFrame.pack()
 
 def register():
     db = sqlite3.connect('app.db')
@@ -24,14 +33,8 @@ def register():
                 (fullname.get(), username.get(), hashed_password))
     db.commit()
 
-Label(root, text="Register", fg="#eee", padx=10, pady=10, font=("Arial", 24)).pack(fill=BOTH)
-Label(root, text="Full Name", fg="#ddd", pady=2, font=("Arial", 14)).pack()
-Entry(root, textvar=fullname, width=50, borderwidth=5, bg="#eee", fg="#111", relief=FLAT).pack()
-Label(root, text="Username", fg="#ddd", pady=2, font=("Arial", 14)).pack()
-Entry(root, textvar=username, width=50, borderwidth=5, bg="#eee", fg="#111", relief=FLAT).pack()
-Label(root, text="Password", fg="#ddd", pady=2, font=("Arial", 14)).pack()
-Entry(root, textvar=password, width=50, show="*", borderwidth=5, bg="#eee", fg="#111", relief=FLAT).pack()
 
-Button(root, text="Register", bg="green", border=0, font=("""Arial
-    """, 14), fg="#fff", padx=15, pady=10, activebackground="green", activeforeground="#fff", command=register).pack()
+registerView(registerFrame, fullname, username, password, register, switchPage, loginFrame)
+loginView(loginFrame, username, password, register)
+
 root.mainloop()
