@@ -12,7 +12,7 @@ def registerView(frame, fullname, username, password, command, switchFrame, logi
     Button(frame, text="Register", bg="green", border=0, font=("""Arial
         """, 14), fg="#fff", padx=15, pady=10, activebackground="green", activeforeground="#fff", command=command).pack()
 
-    Button(frame, text="Register", bg="green", border=0, font=("""Arial
+    Button(frame, text="Login", bg="green", border=0, font=("""Arial
             """, 14), fg="#fff", padx=15, pady=10, activebackground="green", activeforeground="#fff",
            command=lambda: switchFrame(frame, loginFrame)).pack()
 

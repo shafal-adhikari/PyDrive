@@ -5,6 +5,8 @@ from Views.registerView import registerView
 from Views.loginView import loginView
 root = Tk()
 
+list = [1,2,3]
+
 fullname = StringVar()
 username = StringVar()
 password = StringVar()
